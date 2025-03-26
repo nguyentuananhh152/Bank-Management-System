@@ -2,10 +2,36 @@
 Bank Management System in Java Swing
 
 # Start
-docker-compose up -d
+mysql: docker-compose up -d
 
-# import data
+# import data for mysql of docker
 docker exec -i bank_schema-db mysql -u user1 -p'123@123' bank_schema < data.sql
+
+# Build and run
+* javac -d out -cp "BM_System/libs/*" $(find BM_System/src -name "*.java")
+* java -cp "out:BM_System/libs/*" def_pkg.BM_System
+
+# Build file jar
+* Tạo thư mục tmp_jar
+  - mkdir -p tmp_jar/META-INF
+  - cp -r out/* tmp_jar/
+* Giải nén tất cả JARs vào thư mục tmp_jar 
+  - for jar in BM_System/libs/*.jar; do
+    unzip -o $jar -d tmp_jar
+    done
+* Tạo file MANIFEST.MF
+  - echo "Main-Class: def_pkg.BM_System" > tmp_jar/META-INF/MANIFEST.MF
+*  Đóng gói lại thành .jar
+  - jar cvfm BankSystem.jar tmp_jar/META-INF/MANIFEST.MF -C tmp_jar .
+
+# Run file jar
+  - java -jar BankSystem.jar
+
+
+
+# run file jar
+
+
 
 #### Tool and Technologies Used:
 * Java
@@ -13,40 +39,3 @@ docker exec -i bank_schema-db mysql -u user1 -p'123@123' bank_schema < data.sql
 * MySQL
 * Eclipse
 * iText Java Library (PDF Creation)
-
-<br/>
-
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/1-Login.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/2-User_Screen.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/3-E-Statement.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/4-Manager_Screen.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/5-Create%20Account.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/6-Search%20Account.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/7-Accountant_Screen.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/8_Cheque_Deposit.PNG?raw=true)
-<br/>
-<br/>
-<br/>
-![alt text](https://github.com/halts440/Bank-Management-System/blob/main/Screenshots/9-Sample_E_Statement.PNG?raw=true)
-<br/>

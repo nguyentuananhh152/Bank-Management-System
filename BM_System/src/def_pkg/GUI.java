@@ -35,7 +35,7 @@ public class GUI {
 		//---------------------------------Creating Labels------------------------------------------		
 		JLabel l_hSignIn = new JLabel("Sign In");
 		l_hSignIn.setFont( l_hSignIn.getFont().deriveFont(30f) );
-		l_hSignIn.setBounds(550,50,100, 40);
+		l_hSignIn.setBounds(550,50,150, 40);
 		f.add(l_hSignIn);
 		
 		JLabel l_UserName = new JLabel("User Name");
@@ -47,7 +47,7 @@ public class GUI {
 		f.add(l_Password);
 		
 		JLabel l_Signup = new JLabel("Dont have an account?");
-		l_Signup.setBounds(500,380,150, 40);
+		l_Signup.setBounds(400,380,200, 40);
 		f.add(l_Signup);
 	
 		//-----------------------------------Creating TextFields--------------------------------------------------		
@@ -71,7 +71,7 @@ public class GUI {
 		btn_SignUp.setFont( btn_SignUp.getFont().deriveFont(18f) );
 		btn_SignUp.setBackground( new Color(0, 204, 153) );
 		btn_SignUp.setForeground(Color.white);
-		btn_SignUp.setBounds(650,380,110, 40);
+		btn_SignUp.setBounds(650,380,150, 40);
 		f.add(btn_SignUp);
 			
 		//---------------------------------------SignUp functionality----------------------------------------------

@@ -18,19 +18,20 @@ public class DB_Handler {
 	private Connection conn;
 	
 	
-	
+	// Khởi tạo kết nối cơ sở dữ liệu
 	public DB_Handler() {    
         try {
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Connection established successfully!");
         }
         catch (SQLException e) {
+			System.out.println(e.getMessage());
             throw new IllegalStateException("Unable to connect to the database. " + e.getMessage());
         } 
 	}
 	
 	
-	
+	// Kiem tra dang nhap
 	public Login_Account signIn( String username, String password ) {
 		Login_Account user = new Login_Account();
 		try {	
@@ -52,7 +53,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lấy thông tin của người dùng đang đăng nhập
 	public Client getClient( String login_id ) {
 		Client client = new Client();
 		try {	
@@ -74,7 +75,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lấy thông tin tài khoản người dùng đang đăng nhập
 	public Bank_Account getAccount( String login_id ) {
 		Bank_Account account = new Bank_Account();
 		try {	
@@ -95,7 +96,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Kiem tra xem the card co bi khoa hay khong
 	public boolean is_card_active(int card_num)
 	{
 		try
@@ -128,7 +129,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Them giao dich cardless
 	public String add_cardless_entry(int acc_num, int card_num, int amount, String temp_pin)
 	{
 		Random rand = new Random();
@@ -168,7 +169,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Giam tien
 	public void reduce_balance(int amount, int acc_num)
 	{
 		try
@@ -185,7 +186,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lay client_id
 	public int get_client_id(int acc_num)
 	{
 		try
@@ -208,7 +209,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lấy trạng thái tài khoản
 	public int get_account_status(int acc_num)
 	{
 		try {	
@@ -230,7 +231,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lay cnic
 	public String get_cnic(int client_id)
 	{
 		try
@@ -254,7 +255,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Khóa tài khoản
 	public void block_account(int acc_num)
 	{
 		try {	
@@ -270,7 +271,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Mở khóa tài khoản
 	public void unblock_account(int acc_num)
 	{
 		try {	
@@ -286,7 +287,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lấy số thẻ
 	public int get_card_num(int acc_num)
 	{
 		try
@@ -310,7 +311,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Khóa thẻ
 	public void block_card(int card_num)
 	{
 		try
@@ -327,7 +328,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Mở khóa thẻ
 	public void unblock_card(int card_num)
 	{
 		try
@@ -344,7 +345,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Đóng tài khoản
 	public void close_account(int acc_num)
 	{
 		try
@@ -361,7 +362,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Kiểm tra tài khoản đã đăng nhập
 	public boolean login_exists(int client_id)
 	{
 		try
@@ -390,7 +391,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Xác thực cnic
 	public boolean verify_cnic(int client_id, String cnic)
 	{
 		try
@@ -419,7 +420,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Tạo tài khoản người dùng
 	public int create_login(String username, String password)
 	{
 		try
@@ -456,7 +457,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Thêm login_id cho tài khoản người dùng
 	public void set_login_id(int login_id, int client_id)
 	{
 		try
@@ -487,7 +488,7 @@ public class DB_Handler {
 	}
 	
 
-	
+	// Tạo tài khoản người dùng
 	public int DB_CreateAccount( Client new_client, String aType ) {
 		int res = 0;
 		try {
@@ -541,7 +542,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Chuyển tiền tài khoản người dùng
 	public int TransferMoney( Client client, String rAccNum, int amount) {
 		try {	
 			// Check if receiving client already exists
@@ -597,6 +598,7 @@ public class DB_Handler {
 
 	
 	// Check if any account with provided account number and CNIC is present or not and returning the account if found
+	// Tìm kiếm tài khoản ngân hàng theo số tài khoản và CNIC người dùng
 	Bank_Account searchAccount1( String accountNum, String CNIC ) {
 		Bank_Account account = new Bank_Account();
 		try {	
@@ -622,6 +624,7 @@ public class DB_Handler {
 	
 	
 	// Check if any client with provided CNIC and bank account number is present or not and returning that client information
+	// Tìm kiếm người dùng theo CNIC và số tài khoản ngân hàng
 	Client searchClient1( String accountNum, String CNIC ) {
 		Client client = new Client();
 		try {	
@@ -647,6 +650,7 @@ public class DB_Handler {
 	
 	
 	// Check if any account with provided account number is present or not and returning the account if found
+	// Tìm kiếm tài khoản ngân hàng theo số tài khoản
 	Bank_Account searchAccount2( String accountNum ) {
 		Bank_Account account = new Bank_Account();
 		try {	
@@ -671,6 +675,7 @@ public class DB_Handler {
 	
 	
 	// Check if any client with provided CNIC and bank account number is present or not and returning that client information
+	// Tìm kiếm người dùng theo CNIC và số tài khoản ngân hàng
 	Client searchClient2( String accountNum ) {
 		Client client = new Client();
 		try {	
@@ -694,7 +699,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Cập nhật tài khoản ngân hàng
 	public int updateBalance( Bank_Account account, int balance, int t ) {
 		int res = 0;
 		try {	
@@ -737,7 +742,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Lấy lịch sử tài khoản ngân hàng
 	public List<Transaction_History> getTransactions(String accNum, String From, String To) {
 		List<Transaction_History> list=new ArrayList<Transaction_History>();  
 		try {	
@@ -761,7 +766,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Tạo file PDF
 	public int createPDF( Client client, Bank_Account account, String From, String To ) { 
 		int res = 0;
 		try {	
@@ -813,7 +818,7 @@ public class DB_Handler {
 	}
 	
 	
-	
+	// Nap tiền tài khoản ngân hàng
 	public int chequeDeposit( String accNum, String chequeNum, int amount ) { 
 		int res = 0;
 		try {		
@@ -860,6 +865,7 @@ public class DB_Handler {
 	
 	
 	// update client info
+	// Cập nhật thống tin khách hàng
 	public void updateClientInfo(String client_id, String phone, String email, String address ) {
 	 try {   
 		 	String ucQuery = "Update bank_schema.client Set phone = \""+phone+"\" , email = \""+email+"\" , address = \""+ address
@@ -872,7 +878,8 @@ public class DB_Handler {
         	System.out.println("Something went wrong");
         }
 	}
-	
+
+	// Lấy login_id của tài khoản ngân hàng
 	public int getLoginID(int acc_num)
 	{
 		try
@@ -893,7 +900,8 @@ public class DB_Handler {
 		}
 		return -1;
 	}
-	
+
+	// Lấy password của tài khoản ngân hàng
 	public String get_password(int login_id)
 	{
 		try {	
@@ -913,7 +921,8 @@ public class DB_Handler {
 		}
 		return "";
 	}
-	
+
+	// Cập nhật mật khảu tài khoản ngân hàng
 	public void change_password(String pass, int login_id)
 	{
 		try {	
@@ -927,7 +936,8 @@ public class DB_Handler {
 			System.out.println("Something went wrong while getting current password");
 		}
 	}
-	
+
+	// Lấy tên người lập tài khoản ngân hàng
 	public String getName(String id) {
 		String name = "";
 		try
@@ -947,7 +957,8 @@ public class DB_Handler {
 		}
 		return name;
 	}
-	
+
+	// Lấy số tài khoản ngân hàng
 	public String getBalance(String acc_num) {
 		String b = "";
 		try {	
@@ -965,7 +976,8 @@ public class DB_Handler {
 		}
 		return b;
 	}
-	
+
+	// Lấy số tài khoản ngân hàng
 	public String getAccNum(String CNIC) {
 		String b = "";
 		try {	
@@ -982,7 +994,8 @@ public class DB_Handler {
 		}
 		return b;
 	}
-	
+
+	// Dòng cơ sở dữ liệu
 	public void finalize() {
         try {   
         	System.out.println("Connection Closed");

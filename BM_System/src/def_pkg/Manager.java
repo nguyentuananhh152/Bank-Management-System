@@ -18,12 +18,13 @@ public class Manager {
 		return this.name;
 	}
 	
-	// other functions here
+	// Tạo tài khoản ngân hàng
 	public int createAccount(Client newClient, String type) {
 		DB_Handler db = new DB_Handler();
 		return db.DB_CreateAccount(newClient, type );
 	}
-	
+
+	// Khóa tài khoản ngân hàng
 	int block_account(int acc_num, String cnic)
 	{
 		DB_Handler db = new DB_Handler();
@@ -49,7 +50,8 @@ public class Manager {
 		}
 		return 0;
 	}
-	
+
+	// Mở khóa tài khoản ngân hàng
 	int unblock_account(int acc_num, String cnic)
 	{
 		DB_Handler db = new DB_Handler();
@@ -75,7 +77,8 @@ public class Manager {
 		}
 		return 0;
 	}
-	
+
+	// Khóa thẻ
 	int block_card(int acc_num, String cnic, String card_no)
 	{
 		DB_Handler db = new DB_Handler();
@@ -102,7 +105,8 @@ public class Manager {
 		}
 		return 0;
 	}
-	
+
+	// Mở khóa thẻ
 	int unblock_card(int acc_num, String cnic, String card_no)
 	{
 		DB_Handler db = new DB_Handler();
@@ -129,7 +133,8 @@ public class Manager {
 		}
 		return 0;
 	}
-	
+
+	// Đóng tài khoản ngân hàng
 	int close_account(String account_num, String cnic)
 	{
 		DB_Handler db = new DB_Handler();	
@@ -143,24 +148,28 @@ public class Manager {
 		else
 			return -1;
 	}
-	
+
+	// Lấy thống tin khách hàng
 	public Client getClientInfo(String acc_num) {
 		DB_Handler db = new DB_Handler();	
 		Client client = db.searchClient2(acc_num);
 		return client;
 	}
-	
+
+	// Lấy thông tin tài khoản ngân hàng
 	public Bank_Account getAccountInfo(String acc_num) {
 		DB_Handler db = new DB_Handler();	
 		Bank_Account account = db.searchAccount2(acc_num);
 		return account;
 	}
-	
+
+	// Cập nhật thống tin khách hàng
 	public void updateClientInfo(String client_id, String phone, String email, String address ) {
 		DB_Handler db = new DB_Handler();	
 		db.updateClientInfo(client_id, phone, email, address);
 	}
-	
+
+	// Lấy tài khoản ngân hàng theo cnic
 	public String getAccNum(String CNIC) {
 		DB_Handler db = new DB_Handler();	
 		String acc_num = "";

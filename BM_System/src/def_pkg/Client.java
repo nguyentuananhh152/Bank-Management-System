@@ -107,12 +107,14 @@ public class Client {
 	public String getAddress() {
 		return address;
 	}
-	
+
+	// Chuyển tiền từ tài khoản của khách hàng sang tài khoản nhận
 	public int transferMoney( String recv_acc, int amount) {
 		DB_Handler db = new DB_Handler();
 		return db.TransferMoney(this, recv_acc, amount);
 	}
-	
+
+	// Rút tiền mặt không cần thẻ từ tài khoản ngân hàng
 	String do_cardless_cash_withdrawal(Bank_Account account, String amount, String pin)
 	{
 		
@@ -143,7 +145,8 @@ public class Client {
 			return "a";							//-1 means card was blocked
 		}
 	}
-	
+
+	// Đổi mật khẩu tài khoản ngân hàng
 	int change_password(String curr_pass, String new_pass_1, String new_pass_2, String acc_num)
 	{
 		DB_Handler db = new DB_Handler();
@@ -167,7 +170,8 @@ public class Client {
 			return -3;
 		}
 	}
-	
+
+	// Lấy danh sách giao dịch trong một khoảng thời gian
 	public List<Transaction_History> getTransactions( String acc_num, String From, String To) {
 		DB_Handler db = new DB_Handler();
 		List<Transaction_History> list = db.getTransactions( acc_num, From, To);

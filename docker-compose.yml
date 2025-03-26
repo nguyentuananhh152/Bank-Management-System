@@ -1,14 +1,13 @@
-version: '3.8'
-
 services:
     bank_schema-db:
         container_name: bank_schema-db
         image: mysql:8.0
         ports:
-            - '5555:3306'
+            - '3306:3306'
         environment:
+            MYSQL_ROOT_PASSWORD: 123@123
             MYSQL_DATABASE: bank_schema
-            MYSQL_USER: root
+            MYSQL_USER: user1
             MYSQL_PASSWORD: 123@123
         restart:
             unless-stopped

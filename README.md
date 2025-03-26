@@ -4,6 +4,9 @@ Bank Management System in Java Swing
 # Start
 docker-compose up -d
 
+# import data
+docker exec -i bank_schema-db mysql -u user1 -p'123@123' bank_schema < data.sql
+
 #### Tool and Technologies Used:
 * Java
 * Java Swing

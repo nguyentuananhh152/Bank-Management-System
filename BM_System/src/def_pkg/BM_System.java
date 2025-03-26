@@ -3,7 +3,9 @@ package def_pkg;
 import javax.swing.*;
 
 public class BM_System {
-	
+
+
+	// Main method
 	public static void main(String[] args) {
 		JFrame frame=new JFrame("Bank Managment System");
 		frame.setIconImage(  new ImageIcon(System.getProperty("user.dir") + "\\src\\def_pkg\\ddot.png").getImage() );

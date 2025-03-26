@@ -38,7 +38,8 @@ public class Login_Account {
 			type_ = "Accountant";
 		return type_;
 	}
-	
+
+	// Xác thực tài khoản ngân hàng
 	int verify_account(String acc_num, String cnic)
 	{
 		DB_Handler db = new DB_Handler();
@@ -59,7 +60,8 @@ public class Login_Account {
 		}
 		return 0;
 	}
-	
+
+	// Đăng ký tài khoản ngân hàng
 	int signup(String username, String pass_1, String pass_2, String acc_num)
 	{
 		DB_Handler db = new DB_Handler();
@@ -81,7 +83,8 @@ public class Login_Account {
 			return 0;
 		}
 	}
-	
+
+	// Lấy tên người dùng
 	public String getName() {
 		DB_Handler db = new DB_Handler();
 		return db.getName( this.login_id );

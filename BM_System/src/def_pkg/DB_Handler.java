@@ -11,6 +11,7 @@ import java.util.*;
 import com.itextpdf.html2pdf.HtmlConverter;
 
 public class DB_Handler {
+
 	
 	private String url = "jdbc:mysql://localhost:3306/bank_schema";
 	private String username = "root";
@@ -801,9 +802,14 @@ public class DB_Handler {
 			if( rows > 0 ) {
 				String html = html_start + html_data + html_end;
 				try {
-					String file_name = "E_Statement_" + java.time.LocalDateTime.now() + ".pdf";
+//					String file_name = "E_Statement_" + java.time.LocalDateTime.now() + ".pdf";
+//					file_name = file_name.replaceAll(":", "_");
+//			    	HtmlConverter.convertToPdf( html, new FileOutputStream(file_name));
+					String downloadsPath = System.getProperty("user.home") + "/Downloads/";
+					String file_name = downloadsPath + "E_Statement_" + java.time.LocalDateTime.now() + ".pdf";
 					file_name = file_name.replaceAll(":", "_");
-			    	HtmlConverter.convertToPdf( html, new FileOutputStream(file_name));
+
+					HtmlConverter.convertToPdf(html, new FileOutputStream(file_name));
 			        res = 1;
 			    }
 				catch( Exception e) {
